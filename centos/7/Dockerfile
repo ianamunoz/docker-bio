@@ -5,6 +5,7 @@ LABEL License=GPLv2
 
 RUN yum install -y epel-release ; \
     yum install -y ansible \
+                   git     \
                    gcc     \
                    gcc-c++ \ 
                    make    \
