@@ -15,6 +15,8 @@ ENV APP_NAME=bowtie
 ENV VERSION=v1.1.1
 ENV GIT=https://github.com/BenLangmead/bowtie.git
 ENV DEST=/software/$APP_NAME/
+ENV BOWTIE_INDEXES=$DEST/$VERSION/indexes
+ENV PATH $DEST/$VERSION/:$PATH
 
 RUN git clone https://github.com/BenLangmead/bowtie.git
 RUN cd $APP_NAME && \
