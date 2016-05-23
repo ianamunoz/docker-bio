@@ -1,10 +1,7 @@
 FROM sglim2/centos7
 MAINTAINER Ian Merrick <MerrickI@Cardiff.ac.uk>
-LABEL Vendor="sglim2"
-LABEL License=GPLv2
 
 ##############################################################
-# Dockerfile Version:   0.1
 # Software:             bowtie
 # Software Version:     1.1.1
 # Software Website:     https://github.com/BenLangmead/bowtie
