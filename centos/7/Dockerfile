@@ -1,7 +1,13 @@
 FROM centos:latest
 MAINTAINER Ian Merrick <MerrickI@Cardiff.ac.uk>
-LABEL Vendor="sglim2"
-LABEL License=GPLv2
+
+##############################################################
+# Dockerfile Version:   0.1
+# Software:             -
+# Software Version:     -
+# Software Website:     -
+# Description:          Base Centos7
+##############################################################
 
 RUN yum install -y epel-release ; \
     yum install -y ansible \

@@ -1,7 +1,5 @@
-FROM sglim2/centos7-systemd
+FROM sglim2/centos7-systemd-httpd
 MAINTAINER Ian Merrick <MerrickI@Cardiff.ac.uk>
-LABEL Vendor="sglim2"
-LABEL License=GPLv2
 
 ##############################################################
 # Dockerfile Version:   0.1
@@ -13,15 +11,11 @@ LABEL License=GPLv2
 
 RUN yum -y update ; \ 
     yum -y install  \
-        curl        \
-        httpd       \
         php-mysql   \
         php-mcrypt  \
         php-gd      \
         php-curl    \
         php-pear ;  \
     yum clean all;  \
-    systemctl enable httpd.service
-
 EXPOSE 80
 CMD ["/usr/sbin/init"]
