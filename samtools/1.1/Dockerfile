@@ -1,7 +1,5 @@
 FROM sglim2/centos7
 MAINTAINER Ian Merrick <MerrickI@Cardiff.ac.uk>
-LABEL Vendor="sglim2"
-LABEL License=GPLv2
 
 ##############################################################
 # Dockerfile Version:   0.1
