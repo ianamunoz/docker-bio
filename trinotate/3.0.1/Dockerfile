@@ -1,0 +1,25 @@
+FROM sglim2/centos7
+MAINTAINER Ian Merrick <MerrickI@Cardiff.ac.uk>
+
+##############################################################
+# Dockerfile Version:   0.1
+# Software:             trinotate
+# Software Version:     3.0.1
+# Software Website:     https://trinotate.github.io
+# Description:          Annotation suite designed for automatic functional annotation of transcriptomes
+##############################################################
+
+ENV APP_NAME=Trinotate
+ENV VERSION=v3.0.1
+ENV GIT=https://github.com/Trinotate/Trinotate.git
+ENV DEST=/software/$APP_NAME/
+ENV PATH $DEST/$VERSION/:$PATH
+
+RUN git clone $GIT
+RUN cd $APP_NAME ; \
+    git checkout tags/$VERSION ; \
+    cd ../         ; \
+    mkdir -p $DEST ; \
+    mv $APP_NAME $DEST/$VERSION
+CMD ["/bin/bash"]
+
