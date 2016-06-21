@@ -1,0 +1,10 @@
+#%Module1.0#################################################
+##
+proc ModulesHelp { } {
+        global version modroot
+        puts stderr "/software/applications/samtools/1.1"
+}
+conflict samtools
+module-whatis   "Sets environment for samtools 1.1"
+prepend-path    PATH            /software/applications/samtools/1.1/bin
+prepend-path    MANPATH         /software/applications/samtools/1.1/share/man
