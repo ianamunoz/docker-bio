@@ -13,13 +13,12 @@ RUN yum install -y environment-modules ; \
     grep "^/software/modules/" /usr/share/Modules/init/.modulespath  || echo /software/modules >> /usr/share/Modules/init/.modulespath ; \
     . /etc/profile.d/modules.sh 
 
-# SAMTOOLS
+# SAMTOOLS 1.1
 ENV APP_NAME=samtools
 ENV VERSION=1.1
 ENV GIT=https://github.com/BenLangmead/samtools.git
 ENV DEST=/software/applications/$APP_NAME/
 ENV MOD_DEST=/software/modules/$APP_NAME/
-
 RUN yum install -y zlib-devel \
                    ncurses-devel 
 RUN curl -L -o htslib-1.1.tar.gz https://github.com/samtools/htslib/archive/1.1.tar.gz ; \
@@ -34,5 +33,53 @@ RUN tar xzf htslib-1.1.tar.gz ; \
     rm -rf htslib samtools-1.1
 COPY $APP_NAME-$VERSION.module $MOD_DEST/$VERSION
 
-CMD ["/bin/bash"]
+# BOWTIE 2.2.9
+ENV APP_NAME=bowtie2
+ENV VERSION=v2.2.9
+ENV GIT=https://github.com/BenLangmead/bowtie2.git
+ENV DEST=/software/applications/$APP_NAME/
+ENV MOD_DEST=/software/modules/$APP_NAME/
+RUN git clone $GIT
+RUN cd $APP_NAME && \
+    git checkout tags/$VERSION ; \
+    make -j ; \
+    cd ../ ;  \
+    mkdir -p $DEST ; \
+    mv $APP_NAME $DEST/$VERSION
+COPY $APP_NAME-$VERSION.module $MOD_DEST/$VERSION
 
+# BOWTIE 1.1.1
+ENV APP_NAME=bowtie
+ENV VERSION=v1.1.1
+ENV GIT=https://github.com/BenLangmead/bowtie.git
+ENV DEST=/software/applications/$APP_NAME/
+ENV MOD_DEST=/software/modules/$APP_NAME/
+ENV BOWTIE_INDEXES=$DEST/$VERSION/indexes
+RUN git clone https://github.com/BenLangmead/bowtie.git
+RUN cd $APP_NAME && \
+    git checkout tags/$VERSION && \
+    make -j && \
+    cd ../ &&  \
+    mkdir -p $DEST && \
+    mv $APP_NAME $DEST/$VERSION
+COPY $APP_NAME-$VERSION.module $MOD_DEST/$VERSION
+
+# BOWTIE 1.1.2
+ENV APP_NAME=bowtie
+ENV VERSION=v1.1.2
+ENV GIT=https://github.com/BenLangmead/bowtie.git
+ENV DEST=/software/applications/$APP_NAME/
+ENV BOWTIE_INDEXES=$DEST/$VERSION/indexes
+ENV PATH $DEST/$VERSION/:$PATH
+RUN git clone https://github.com/BenLangmead/bowtie.git
+RUN cd $APP_NAME && \
+    git checkout tags/$VERSION && \
+    make -j && \
+    cd ../ &&  \
+    mkdir -p $DEST && \
+    mv $APP_NAME $DEST/$VERSION
+COPY $APP_NAME-$VERSION.module $MOD_DEST/$VERSION
+
+
+
+CMD ["/bin/bash"]

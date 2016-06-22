@@ -11,8 +11,8 @@ MAINTAINER Ian Merrick <MerrickI@Cardiff.ac.uk>
 ENV APP_NAME=bowtie2
 ENV VERSION=v2.2.9
 ENV GIT=https://github.com/BenLangmead/bowtie2.git
-ENV DEST=/software/$APP_NAME/
-ENV PATH $DEST/$VERSION/:$PATH
+ENV DEST=/software/applications/$APP_NAME/
+ENV PATH=$DEST/$VERSION/:$PATH
 
 RUN git clone $GIT
 RUN cd $APP_NAME && \

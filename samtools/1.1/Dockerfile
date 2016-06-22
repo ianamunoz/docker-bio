@@ -12,7 +12,8 @@ MAINTAINER Ian Merrick <MerrickI@Cardiff.ac.uk>
 ENV APP_NAME=samtools
 ENV VERSION=1.1
 ENV GIT=https://github.com/BenLangmead/samtools.git
-ENV DEST=/software/$APP_NAME/
+ENV DEST=/software/applications/$APP_NAME/
+ENV PATH=$DEST/$VERSION/:$PATH
 
 RUN yum install -y zlib-devel \
                    ncurses-devel 
