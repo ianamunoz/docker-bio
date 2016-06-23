@@ -1,0 +1,11 @@
+#%Module1.0#################################################
+##
+proc ModulesHelp { } {
+        global version modroot
+        puts stderr "/software/applications/trinityrnaseq/v2.2.0"
+}
+conflict trinityrnaseq
+module-whatis   "Sets environment for trinityrnaseq v2.2.0"
+prepend-path    PATH            /software/applications/trinityrnaseq/v2.2.0
+prepend-path    PATH            /software/applications/trinityrnaseq/v2.2.0/util
+prepend-path    PATH            /software/applications/trinityrnaseq/v2.2.0/util/misc

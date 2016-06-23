@@ -1,0 +1,10 @@
+#%Module1.0#################################################
+##
+proc ModulesHelp { } {
+        global version modroot
+        puts stderr "/software/applications/trimmomatic/0.36"
+}
+conflict trimmomatic
+module-whatis   "Sets environment for trimmomatic 0.36"
+setenv    TRIMMOMATIC            /software/applications/trimmomatic/0.36/trimmomatic-0.36.jar
+setenv    ADAPTERPATH            /software/applications/trimmomatic/0.36/adapters

@@ -11,7 +11,8 @@ MAINTAINER Ian Merrick <MerrickI@Cardiff.ac.uk>
 
 ENV APP_NAME=trimmomatic
 ENV VERSION=0.36
-ENV DEST=/software/$APP_NAME/
+ENV DEST=/software/applications/$APP_NAME/
+ENV PATH=$DEST/$VERSION:$PATH
 
 RUN yum install -y unzip
 RUN curl -L -o Trimmomatic-0.36.zip \

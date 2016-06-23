@@ -69,8 +69,8 @@ ENV APP_NAME=bowtie
 ENV VERSION=v1.1.2
 ENV GIT=https://github.com/BenLangmead/bowtie.git
 ENV DEST=/software/applications/$APP_NAME/
+ENV MOD_DEST=/software/modules/$APP_NAME/
 ENV BOWTIE_INDEXES=$DEST/$VERSION/indexes
-ENV PATH $DEST/$VERSION/:$PATH
 RUN git clone https://github.com/BenLangmead/bowtie.git
 RUN cd $APP_NAME && \
     git checkout tags/$VERSION && \
@@ -80,6 +80,33 @@ RUN cd $APP_NAME && \
     mv $APP_NAME $DEST/$VERSION
 COPY $APP_NAME-$VERSION.module $MOD_DEST/$VERSION
 
+# TRIMMOMATIC 0.36
+ENV APP_NAME=trimmomatic
+ENV VERSION=0.36
+ENV DEST=/software/applications/$APP_NAME/
+ENV MOD_DEST=/software/modules/$APP_NAME/
+RUN yum install -y unzip java
+RUN curl -L -o Trimmomatic-0.36.zip \
+       http://www.usadellab.org/cms/uploads/supplementary/Trimmomatic/Trimmomatic-0.36.zip ; \
+    unzip Trimmomatic-0.36.zip ; \
+    mkdir -p $DEST ; \
+    mv Trimmomatic-0.36  $DEST/$VERSION
+COPY $APP_NAME-$VERSION.module $MOD_DEST/$VERSION
 
+# TRINITYRNASEQ 2.2.0
+ENV APP_NAME=trinityrnaseq
+ENV VERSION=v2.2.0
+ENV GIT=https://github.com/trinityrnaseq/trinityrnaseq.git
+ENV DEST=/software/applications/$APP_NAME/
+RUN git clone $GIT
+RUN cd $APP_NAME ; \
+    git checkout tags/$VERSION ; \
+    make -j        ; \
+    make plugins   ; \
+    cd ../         ; \
+    mkdir -p $DEST ; \
+    cd ../         ; \
+    mv $APP_NAME $DEST/$VERSION
+COPY $APP_NAME-$VERSION.module $MOD_DEST/$VERSION
 
 CMD ["/bin/bash"]
