@@ -98,6 +98,7 @@ ENV APP_NAME=trinityrnaseq
 ENV VERSION=v2.2.0
 ENV GIT=https://github.com/trinityrnaseq/trinityrnaseq.git
 ENV DEST=/software/applications/$APP_NAME/
+ENV MOD_DEST=/software/modules/$APP_NAME/
 RUN git clone $GIT
 RUN cd $APP_NAME ; \
     git checkout tags/$VERSION ; \
