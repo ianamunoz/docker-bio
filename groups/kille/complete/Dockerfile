@@ -25,6 +25,8 @@ RUN curl -L -o htslib-1.1.tar.gz https://github.com/samtools/htslib/archive/1.1.
     curl -L -o samtools-1.1.tar.gz https://github.com/samtools/samtools/archive/1.1.tar.gz 
 RUN tar xzf htslib-1.1.tar.gz ; \ 
     tar xzf samtools-1.1.tar.gz ; \
+    rm -rf htslib-1.1.tar.gz ; \
+    rm -rf samtools-1.1.tar.gz ; \
     mv htslib-1.1 htslib ; \ 
     cd samtools-1.1 ; \
     make -j HTSDIR=../htslib ; \
@@ -109,5 +111,21 @@ RUN cd $APP_NAME ; \
     cd ../         ; \
     mv $APP_NAME $DEST/$VERSION
 COPY $APP_NAME-$VERSION.module $MOD_DEST/$VERSION
+
+# TRINOTATE 3.0.1
+ENV APP_NAME=Trinotate
+ENV VERSION=v3.0.1
+ENV GIT=https://github.com/Trinotate/Trinotate.git
+ENV DEST=/software/applications/$APP_NAME/
+ENV MOD_DEST=/software/modules/$APP_NAME/
+RUN yum install -y perl-DBD-SQLite
+RUN git clone $GIT
+RUN cd $APP_NAME ; \i
+    git checkout tags/$VERSION ; \
+    cd ../         ; \
+    mkdir -p $DEST ; \
+    mv $APP_NAME $DEST/$VERSION
+COPY $APP_NAME-$VERSION.module $MOD_DEST/$VERSION
+
 
 CMD ["/bin/bash"]

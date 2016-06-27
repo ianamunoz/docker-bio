@@ -1,0 +1,10 @@
+#%Module1.0#################################################
+##
+proc ModulesHelp { } {
+        global version modroot
+        puts stderr "/software/applications/Trinotate/v3.0.1"
+}
+conflict Trinotate
+module load samtools/1.1
+module-whatis   "Sets environment Trinotate v3.0.1"
+prepend-path    PATH      /software/applications/Trinotate/v3.0.1
