@@ -12,7 +12,7 @@ MAINTAINER Ian Merrick <MerrickI@Cardiff.ac.uk>
 ENV APP_NAME=Trinotate
 ENV VERSION=v3.0.1
 ENV GIT=https://github.com/Trinotate/Trinotate.git
-ENV DEST=/software/$APP_NAME/
+ENV DEST=/software/applications/$APP_NAME/
 ENV PATH $DEST/$VERSION/:$PATH
 
 RUN git clone $GIT
