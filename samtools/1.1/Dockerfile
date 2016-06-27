@@ -21,6 +21,8 @@ RUN curl -L -o htslib-1.1.tar.gz https://github.com/samtools/htslib/archive/1.1.
     curl -L -o samtools-1.1.tar.gz https://github.com/samtools/samtools/archive/1.1.tar.gz 
 RUN tar xzf htslib-1.1.tar.gz ; \ 
     tar xzf samtools-1.1.tar.gz ; \
+    rm -rf htslib-1.1.tar.gz ; \
+    rm -rf samtools-1.1.tar.gz ; \
     mv htslib-1.1 htslib ; \ 
     cd samtools-1.1 ; \
     make -j HTSDIR=../htslib ; \
