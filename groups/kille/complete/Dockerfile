@@ -120,7 +120,7 @@ ENV DEST=/software/applications/$APP_NAME/
 ENV MOD_DEST=/software/modules/$APP_NAME/
 RUN yum install -y perl-DBD-SQLite
 RUN git clone $GIT
-RUN cd $APP_NAME ; \i
+RUN cd $APP_NAME ; \
     git checkout tags/$VERSION ; \
     cd ../         ; \
     mkdir -p $DEST ; \
