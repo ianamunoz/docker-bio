@@ -12,17 +12,16 @@ ENV APP_NAME=ruby
 ENV VERSION=2.3.1
 ENV DEST=/software/applications/$APP_NAME/
 ENV PATH=$DEST/$VERSION/bin:$PATH
-ENV PYTHONPATH=$DEST/$VERSION/lib/python2.7
 ENV MANPATH=$DEST/$VERSION/share/man:$MANPATH
 
 RUN yum install -y zlib zlib-devel openssl openssl-devel readline readline-devel ; \
-    curl -L -o ruby-2.3.1.tar.gz https://cache.ruby-lang.org/pub/ruby/2.3/ruby-2.3.1.tar.gz ; \
-    tar xvf ruby-2.3.1.tar.gz ; \
-    cd ruby-$VERSION ; \
+    curl -L -o $APP_NAME-$VERSION.tar.gz https://cache.ruby-lang.org/pub/ruby/2.3/$APP_NAME-$VERSION.tar.gz ; \
+    tar xvf $APP_NAME-$VERSION.tar.gz ; \
+    cd $APP_NAME-$VERSION ; \
     ./configure --prefix=$DEST/$VERSION ; \
     make -j ; \
     make install ; \
     cd ../ ;  \
-    rm -rf ruby-$VERSION ;  
+    rm -rf $APP_NAME-$VERSION $APP_NAME-$VERSION.tar.gz   
 CMD ["/bin/bash"]
 
