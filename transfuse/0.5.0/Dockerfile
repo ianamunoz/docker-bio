@@ -13,7 +13,17 @@ ENV VERSION=v0.5.0
 ENV GIT=https://github.com/cboursnell/transfuse
 ENV DEST=/software/applications/$APP_NAME/
 
-RUN git clone $GIT ; \
+RUN yum install -y autoconf automake ; \
+    curl -L -o v1.11.1.tar.gz  https://github.com/torognes/vsearch/archive/v1.11.1.tar.gz ; \
+    tar xzf v1.11.1.tar.gz ; \
+    cd vsearch-1.11.1 ; \
+    ./autogen.sh ; \
+    ./configure ; \
+    make ; \
+    make install ; \
+    cd .. ; \
+    rm -rf vsearch-1.11.1  v1.11.1.tar.gz ; \
+    git clone $GIT ; \
     cd $APP_NAME ; \
     git checkout tags/$VERSION ; \
     gem build *spec ; \
