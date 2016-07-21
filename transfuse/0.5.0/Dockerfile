@@ -13,7 +13,7 @@ ENV VERSION=v0.5.0
 ENV GIT=https://github.com/cboursnell/transfuse
 ENV DEST=/software/applications/$APP_NAME/
 
-RUN yum install -y autoconf automake ; \
+RUN yum install -y autoconf automake bzip2-devel ; \
     curl -L -o v1.8.0.tar.gz  https://github.com/torognes/vsearch/archive/v1.8.0.tar.gz ; \
     tar xzf v1.8.0.tar.gz ; \
     cd vsearch-1.8.0 ; \
