@@ -19,4 +19,5 @@ RUN yum install -y epel-release ; \
                    net-tools ; \
     yum update  -y
 
-CMD ["/bin/bash"]
+COPY user_entrypoint.sh /usr/local/bin/user_entrypoint.sh
+ENTRYPOINT ["/usr/local/bin/user_entrypoint.sh"]
