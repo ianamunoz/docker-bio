@@ -12,3 +12,4 @@ if [[ ! -z ${HOST_USER_ID+x} &&  ! -z ${HOST_GROUP_ID+x} ]] ; then
 else
  exec $@
 fi
+
