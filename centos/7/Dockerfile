@@ -15,6 +15,7 @@ RUN yum install -y epel-release ; \
                    gcc     \
                    gcc-c++ \ 
                    make    \
+                   which \
                    net-tools ; \
     yum update  -y
 
