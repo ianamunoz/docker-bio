@@ -7,6 +7,25 @@
  * [docker-machine](https://docs.docker.com/machine/) docker-machine documentation
 
 
+## Dockerfiles
+ 1. Most (all) dockerfiles inherit our base image sglim2/centos7, which in turn is
+    based on the official centos:latest image.
+ 2. Many of the images will download 3rd party software. While we try to verify the 
+    authenticity of such software, this is not easily achieved, particularly
+    when the 3rd party software itself pulls in dependencies.
+ 3. Many images will install software from source. To keep the images light-weight,
+    where possible the dockerfile will download the software, verify it, build it, and remove the 
+    source again within a single RUN instruction. Relevant licenses are written to /usr/share/licenses/. 
+ 4. In certain usage scenarios (in particular running on a linux host and bind-mounting a folder),
+    writing to the mounted folder under default usage of the container, will write the files to the host 
+    as root-owned. This is somewhat undesirable. To overcome this, a package called gosu is 
+    used in all our images, which will allow the files to be written to the host as any desired user.
+    To do this you will need to set extra environment variables when running the container - further
+    usage instructions are defined below.
+ 
+## A note on Bind-mounting
+ 
+
 ## Provision Containers on Openstack using docker-machine
 ```docker-machine``` is a package provided by docker that lets you install Docker 
 Engine on virtual hosts, and manage those hosts using docker-machine commands. 
