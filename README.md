@@ -23,8 +23,31 @@
     To do this you will need to set extra environment variables when running the container - further
     usage instructions are defined below.
  
-## A note on Bind-mounting
- 
+## A Note on Bind-Mounting
+It is often desirable mount a local folder to the dockerfile (bind-mount). This is easiy 
+acheived using the -v option to the docker run command, for example:
+```bash
+docker run -it -v $PWD:/mnt/host sglim2/centos7:latest bash
+``` 
+Here we assume a linux host, starting the latest sglim2/centos7 container, and bind-mounting the 
+current working directory to the path /mnt/host in the container. The problem with this is that 
+our default user within the container is root, and therefore any files/folders created under the
+new mount point will be owned by root. This is sometimes undersirable, instead you may want the new
+files/folders to be owned by a different user, likely the host user. To deal with this, our containers
+have an entrypoint which will create a new user within the container, and add them to the sudoers list
+for good measure. To create this user we just need to pass two environment variables to the docker run command:
+```bash
+docker run -it -v $PWD:/mnt/host -e HOST_USER_ID=`id -u $USER` -e HOST_GROUP_ID=`id -g $USER`  sglim2/centos7:latest bash
+```
+Here the environment variables 'HOST_USER_ID' and 'HOST_GROUP_ID' are passed to the container (respectively holding the uid 
+and gid of the desired user), the entrypoint recognises this and deals with it accordingly. Now instead of the 
+container starting under the root user, it will start under a user with uid and gid specified at the command line. Now any 
+files/folders written to the mount point will be written as the desired user.
+
+Note, this behaviour is only related to linux hosts. Windows and Mac deal with correcting permissions automatically.
+
+If the two environment variables are not passed to the docker container on start, then the container user still defaults
+to root.
 
 ## Provision Containers on Openstack using docker-machine
 ```docker-machine``` is a package provided by docker that lets you install Docker 
