@@ -15,10 +15,12 @@ ENV DEST=/software/$APP_NAME/
 ENV PATH $DEST/$VERSION/:$PATH
 
 RUN yum install -y zlib-devel ; \
-    git clone $GIT
-RUN cd $APP_NAME ; \
+    git clone $GIT ; \
+    cd $APP_NAME ; \
     git checkout tags/$VERSION ; \
     make -j ; \
+    mkdir -p /usr/share/licenses/$APP_NAME-$VERSION ; \
+    cp COPYING /usr/share/licenses/$APP_NAME-$VERSION/ ; \
     cd ../ ;  \
     mkdir -p $DEST ; \
     mv $APP_NAME $DEST/$VERSION

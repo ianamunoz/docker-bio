@@ -15,12 +15,14 @@ ENV DEST=/software/applications/$APP_NAME/
 ENV BOWTIE_INDEXES=$DEST/$VERSION/indexes
 ENV PATH=$DEST/$VERSION/:$PATH
 
-RUN git clone https://github.com/BenLangmead/bowtie.git
-RUN cd $APP_NAME && \
-    git checkout tags/$VERSION && \
-    make -j && \
-    cd ../ &&  \
-    mkdir -p $DEST && \
+RUN git clone $GIT ; \
+    cd $APP_NAME ; \
+    git checkout tags/$VERSION ; \
+    make -j ; \
+    mkdir -p /usr/share/licenses/$APP_NAME-$VERSION ; \
+    cp LICENSE /usr/share/licenses/$APP_NAME-$VERSION/ ; \
+    cd ../ ;  \
+    mkdir -p $DEST ; \
     mv $APP_NAME $DEST/$VERSION
 CMD ["/bin/bash"]
 

@@ -14,10 +14,12 @@ ENV GIT=https://github.com/BenLangmead/bowtie2.git
 ENV DEST=/software/applications/$APP_NAME/
 ENV PATH=$DEST/$VERSION/:$PATH
 
-RUN git clone $GIT
-RUN cd $APP_NAME && \
+RUN git clone $GIT ; \
+    cd $APP_NAME ; \
     git checkout tags/$VERSION ; \
     make -j ; \
+    mkdir -p /usr/share/licenses/$APP_NAME-$VERSION ; \
+    cp LICENSE /usr/share/licenses/$APP_NAME-$VERSION/ ; \
     cd ../ ;  \
     mkdir -p $DEST ; \
     mv $APP_NAME $DEST/$VERSION
