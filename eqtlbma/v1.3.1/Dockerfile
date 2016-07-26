@@ -5,7 +5,7 @@ MAINTAINER Ian Merrick <MerrickI@Cardiff.ac.uk>
 # Software:             eqtlbma
 # Software Version:     1.3.1
 # Software Website:     https://github.com/timflutre/eqtlbma
-# Description:          Package to detect
+# Description:          Package to detect eQTLs
 ##############################################################
 
 ENV APP_NAME=eqtlbma
