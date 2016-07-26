@@ -12,7 +12,7 @@ ENV APP_NAME=eqtlbma
 ENV VERSION=v1.3.1
 ENV GIT=https://github.com/timflutre/eqtlbma.git
 ENV DEST=/software/applications/$APP_NAME/
-ENV PATH=$DEST/$VERSION/:$PATH
+ENV PATH=$DEST/$VERSION/bin:$PATH
 ENV INFOPATH=$DEST/$VERSION/share/info:$INFOPATH
 
 RUN yum install -y \
