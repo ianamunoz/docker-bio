@@ -16,7 +16,7 @@ ENV LD_LIBRARY_PATH=/software/applications/trinityrnaseq/v2.2.0/trinity-plugins/
 ENV DEST=/software/applications/$APP_NAME/
 ENV PATH=$DEST/$VERSION:$PATH
 
-RUN yum install -y bzip2
+RUN yum install -y bzip2 ; \
     git clone $GIT ; \
     cd $APP_NAME ; \
     git checkout tags/$VERSION ; \
