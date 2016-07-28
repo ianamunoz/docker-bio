@@ -15,7 +15,15 @@ ENV GIT=https://github.com/Trinotate/Trinotate.git
 ENV DEST=/software/applications/$APP_NAME/
 ENV PATH=$DEST/$VERSION/:$PATH
 
-RUN git clone $GIT ; \
+RUN yum install -y  \
+           lighttpd \
+           perl-CGI \
+           perl-DBI \
+           perl-DBD-SQLite \
+           perl-HTML-Template \
+           perl-URI \
+           ; \
+    git clone $GIT ; \
     cd $APP_NAME ; \
     git checkout tags/$VERSION ; \
     mkdir -p /usr/share/licenses/$APP_NAME-$VERSION ; \

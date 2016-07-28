@@ -8,10 +8,11 @@
 
 
 ## Dockerfiles
- 1. Most (all) dockerfiles inherit our base image sglim2/centos7, which in turn is based on the official centos:latest image.
- 2. Many of the images will download 3rd party software. While we try to verify the authenticity of such software, this is not easily achieved, particularly when the 3rd party software itself pulls in dependencies.
- 3. Many images will install software from source. To keep the images light-weight, where possible the dockerfile will download the software, verify it, build it, and remove the source again within a single RUN instruction. Relevant licenses are written to /usr/share/licenses/. 
- 4. In certain usage scenarios (in particular running on a linux host and bind-mounting a folder), writing to the mounted folder under default usage of the container, will write the files to the host as root-owned. This is somewhat undesirable. To overcome this, a package called gosu is used in all our images, which will allow the files to be written to the host as any desired user. To do this you will need to set extra environment variables when running the container - further usage instructions are defined below.
+ 1. The respective license of the applications contained within the docker container can be found in /usr/share/licenses/ folder of that container. 
+ 2. Most (all) dockerfiles inherit our base image sglim2/centos7, which in turn is based on the official centos:latest image.
+ 3. Many of the images will download 3rd party software. While we try to verify the authenticity of such software, this is not easily achieved, particularly when the 3rd party software itself pulls in dependencies.
+ 4. Many images will install software from source. To keep the images light-weight, where possible the dockerfile will download the software, verify it, build it, and remove the source again within a single RUN instruction. 
+ 5. In certain usage scenarios (in particular running on a linux host and bind-mounting a folder), writing to the mounted folder under default usage of the container, will write the files to the host as root-owned. This is somewhat undesirable. To overcome this, a package called gosu is used in all our images, which will allow the files to be written to the host as any desired user. To do this you will need to set extra environment variables when running the container - further usage instructions are defined below.
  
 ## A Note on Bind-Mounting
 It is often desirable mount a local folder inside the docker container (bind-mount). This is easiy acheived using the -v option to the 'docker run' command, for example:
