@@ -13,11 +13,13 @@ ENV APP_NAME=Trinotate
 ENV VERSION=v3.0.1
 ENV GIT=https://github.com/Trinotate/Trinotate.git
 ENV DEST=/software/applications/$APP_NAME/
-ENV PATH $DEST/$VERSION/:$PATH
+ENV PATH=$DEST/$VERSION/:$PATH
 
-RUN git clone $GIT
-RUN cd $APP_NAME ; \
+RUN git clone $GIT ; \
+    cd $APP_NAME ; \
     git checkout tags/$VERSION ; \
+    mkdir -p /usr/share/licenses/$APP_NAME-$VERSION ; \
+    cp LICENSE.txt /usr/share/licenses/$APP_NAME-$VERSION/ ; \
     cd ../         ; \
     mkdir -p $DEST ; \
     mv $APP_NAME $DEST/$VERSION
