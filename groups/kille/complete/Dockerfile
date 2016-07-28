@@ -20,10 +20,10 @@ ENV GIT=https://github.com/BenLangmead/samtools.git
 ENV DEST=/software/applications/$APP_NAME/
 ENV MOD_DEST=/software/modules/$APP_NAME/
 RUN yum install -y zlib-devel \
-                   ncurses-devel 
-RUN curl -L -o htslib-1.1.tar.gz https://github.com/samtools/htslib/archive/1.1.tar.gz ; \
-    curl -L -o samtools-1.1.tar.gz https://github.com/samtools/samtools/archive/1.1.tar.gz 
-RUN tar xzf htslib-1.1.tar.gz ; \ 
+                   ncurses-devel ; \
+    curl -L -o htslib-1.1.tar.gz https://github.com/samtools/htslib/archive/1.1.tar.gz ; \
+    curl -L -o samtools-1.1.tar.gz https://github.com/samtools/samtools/archive/1.1.tar.gz ; \
+    tar xzf htslib-1.1.tar.gz ; \ 
     tar xzf samtools-1.1.tar.gz ; \
     rm -rf htslib-1.1.tar.gz ; \
     rm -rf samtools-1.1.tar.gz ; \
@@ -41,8 +41,8 @@ ENV VERSION=v2.2.9
 ENV GIT=https://github.com/BenLangmead/bowtie2.git
 ENV DEST=/software/applications/$APP_NAME/
 ENV MOD_DEST=/software/modules/$APP_NAME/
-RUN git clone $GIT
-RUN cd $APP_NAME && \
+RUN git clone $GIT ; \
+    cd $APP_NAME ; \
     git checkout tags/$VERSION ; \
     make -j ; \
     cd ../ ;  \
@@ -57,12 +57,12 @@ ENV GIT=https://github.com/BenLangmead/bowtie.git
 ENV DEST=/software/applications/$APP_NAME/
 ENV MOD_DEST=/software/modules/$APP_NAME/
 ENV BOWTIE_INDEXES=$DEST/$VERSION/indexes
-RUN git clone https://github.com/BenLangmead/bowtie.git
-RUN cd $APP_NAME && \
-    git checkout tags/$VERSION && \
-    make -j && \
-    cd ../ &&  \
-    mkdir -p $DEST && \
+RUN git clone $GIT ; \
+    cd $APP_NAME ; \
+    git checkout tags/$VERSION ; \
+    make -j ; \
+    cd ../ ;  \
+    mkdir -p $DEST ; \
     mv $APP_NAME $DEST/$VERSION
 COPY $APP_NAME-$VERSION.module $MOD_DEST/$VERSION
 
@@ -73,12 +73,12 @@ ENV GIT=https://github.com/BenLangmead/bowtie.git
 ENV DEST=/software/applications/$APP_NAME/
 ENV MOD_DEST=/software/modules/$APP_NAME/
 ENV BOWTIE_INDEXES=$DEST/$VERSION/indexes
-RUN git clone https://github.com/BenLangmead/bowtie.git
-RUN cd $APP_NAME && \
-    git checkout tags/$VERSION && \
-    make -j && \
-    cd ../ &&  \
-    mkdir -p $DEST && \
+RUN git clone $GIT ; \
+    cd $APP_NAME ; \
+    git checkout tags/$VERSION ; \
+    make -j ; \
+    cd ../ ; \
+    mkdir -p $DEST ; \
     mv $APP_NAME $DEST/$VERSION
 COPY $APP_NAME-$VERSION.module $MOD_DEST/$VERSION
 
@@ -87,8 +87,10 @@ ENV APP_NAME=trimmomatic
 ENV VERSION=0.36
 ENV DEST=/software/applications/$APP_NAME/
 ENV MOD_DEST=/software/modules/$APP_NAME/
-RUN yum install -y unzip java
-RUN curl -L -o Trimmomatic-0.36.zip \
+RUN yum install -y \ 
+           java \
+           unzip ; \
+    curl -L -o Trimmomatic-0.36.zip \
        http://www.usadellab.org/cms/uploads/supplementary/Trimmomatic/Trimmomatic-0.36.zip ; \
     unzip Trimmomatic-0.36.zip ; \
     mkdir -p $DEST ; \
@@ -101,10 +103,12 @@ ENV VERSION=v2.2.0
 ENV GIT=https://github.com/trinityrnaseq/trinityrnaseq.git
 ENV DEST=/software/applications/$APP_NAME/
 ENV MOD_DEST=/software/modules/$APP_NAME/
-RUN git clone $GIT
-RUN cd $APP_NAME ; \
+RUN yum install -y bzip2 ; \
+    git clone $GIT ; \
+    cd $APP_NAME ; \
     git checkout tags/$VERSION ; \
     make -j        ; \
+    make trinity_essentials ; \
     make plugins   ; \
     cd ../         ; \
     mkdir -p $DEST ; \
@@ -118,9 +122,9 @@ ENV VERSION=v3.0.1
 ENV GIT=https://github.com/Trinotate/Trinotate.git
 ENV DEST=/software/applications/$APP_NAME/
 ENV MOD_DEST=/software/modules/$APP_NAME/
-RUN yum install -y perl-DBD-SQLite
-RUN git clone $GIT
-RUN cd $APP_NAME ; \
+RUN yum install -y perl-DBD-SQLite ; \
+    git clone $GIT ; \
+    cd $APP_NAME ; \
     git checkout tags/$VERSION ; \
     cd ../         ; \
     mkdir -p $DEST ; \

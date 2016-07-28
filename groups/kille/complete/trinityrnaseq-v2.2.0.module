@@ -9,3 +9,4 @@ module-whatis   "Sets environment for trinityrnaseq v2.2.0"
 prepend-path    PATH            /software/applications/trinityrnaseq/v2.2.0
 prepend-path    PATH            /software/applications/trinityrnaseq/v2.2.0/util
 prepend-path    PATH            /software/applications/trinityrnaseq/v2.2.0/util/misc
+prepend-path    LD_LIBRARY_PATH /software/applications/trinityrnaseq/v2.2.0/trinity-plugins/htslib
