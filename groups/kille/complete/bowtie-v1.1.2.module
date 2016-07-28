@@ -2,8 +2,8 @@
 ##
 proc ModulesHelp { } {
         global version modroot
-        puts stderr "/software/applications/bowtie/1.1.2"
+        puts stderr "/software/applications/bowtie/v1.1.2"
 }
 conflict bowtie
-module-whatis   "Sets environment for bowtie 1.1.2"
-prepend-path    PATH            /software/applications/bowtie/1.1.2
+module-whatis   "Sets environment for bowtie v1.1.2"
+prepend-path    PATH            /software/applications/bowtie/v1.1.2
