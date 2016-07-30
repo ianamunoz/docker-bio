@@ -85,6 +85,7 @@ RUN yum install -y \
     git checkout tags/$VERSION ; \
     perl Build.PL --install_base=$DEST/$$VERSION ; \
     ./Build install ; \    ## interactive step. BUGGER!!
+    rm -rf ~/.cpan ; \ 
     mkdir -p /usr/share/licenses/$APP_NAME-$VERSION ; \
     cp LICENSE.txt /usr/share/licenses/$APP_NAME-$VERSION/ ; \
     cd ../         ; \
