@@ -5,7 +5,7 @@ MAINTAINER Ian Merrick <MerrickI@Cardiff.ac.uk>
 # Dockerfile Version:   0.1
 # Software:             samtools
 # Software Version:     1.1
-# Software Website:     https://github.com/samtools/samtools/archive/1.1.tar.gz
+# Software Website:     https://github.com/samtools/samtools/
 # Description:          samtools
 ##############################################################
 
