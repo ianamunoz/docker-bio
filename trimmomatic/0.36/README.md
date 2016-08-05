@@ -1,13 +1,22 @@
-Trimmomatic Usage
-=================
+# trimmomatic-0.36
 
+trimmomatic-0.36 license: GPLv3 
 
-Running Trimmomatic on your own data-sets
------------------------------------------
-We will create a bowtie container, attaching your local current working directory (assuming your
-data-sets sit in this folder), and run bowtie on the data, without manually attaching to the
-container.
+## Useful Links
+
+ * [package web-site](http://www.usadellab.org)
+ * [container github-site](https://github.com/sglim2/docker-bio)
+ * [Docker Hub](https://hub.docker.com/u/sglim2/)
+
+## Example Usage
+See the [container github-site](https://github.com/sglim2/docker-bio) for further usage documentation.
+
+To start a container
 ```
-docker run
+docker run -it sglim2/trimmomatic-0.36 bash
+```
+To run the trimmomatic application use the cmomand:
+```
+java -jar $TRIMMOMATIC [args]
 ```
 
