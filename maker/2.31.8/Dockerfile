@@ -12,7 +12,7 @@ ENV APP_NAME=maker
 ENV VERSION=2.31.8
 ENV GIT=https://github.com/sglim2/maker
 ENV DEST=/software/$APP_NAME/
-ENV PATH $DEST/$VERSION/:$PATH
+ENV PATH=$DEST/$VERSION/:$PATH
 
 ENV PERL_MM_USE_DEFAULT=1
 RUN yum install -y perl-CPAN \
@@ -35,8 +35,12 @@ RUN yum install -y perl-CPAN \
     cpan install XML::Writer ; \
     cpan install YAML ; \     
     cpan install XML::Twig ; \
-    cpan install Bio::Root::Version 
+    cpan install Bio::Root::Version ; \
+    rm -rf ~/.cpan/build 
 
+RUN curl -L -o RepeatMasker-open-4-0-6.tar.gz  http://www.repeatmasker.org/RepeatMasker-open-4-0-6.tar.gz ; \
+    tar xvzf RepeatMasker-open-4-0-6.tar.gz ; \
+    cd 
 RUN git clone $GIT
 RUN cd $APP_NAME ; \
     git checkout tags/$VERSION ; \
@@ -45,7 +49,7 @@ RUN cd $APP_NAME ; \
     ./Build installdeps ; \
     ./Build blast ; \
     ./Build snap ; \
-    ./Build repeatmasker ; \ ## interactive - can not automate!
+#    ./Build repeatmasker ; \ ## interactive - can not automate!
     ./Build install ; \
     cd ../  ; \
     mkdir -p $DEST && \
