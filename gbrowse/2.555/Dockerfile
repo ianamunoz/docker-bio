@@ -1,4 +1,4 @@
-FROM sglim2/centos7
+FROM sglim2/centos7-systemd
 MAINTAINER Ian Merrick <MerrickI@Cardiff.ac.uk>
 
 ##############################################################
@@ -8,6 +8,11 @@ MAINTAINER Ian Merrick <MerrickI@Cardiff.ac.uk>
 # Software Website:     https://github.com/GMOD/GBrowse
 # Description:          the Generic Genome Browser
 ##############################################################
+
+RUN yum install -y httpd ; \
+    yum clean all; \
+    systemctl enable httpd.service
+EXPOSE 80
 
 RUN yum install -y \
            bzip2 \
