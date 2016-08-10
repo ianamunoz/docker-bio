@@ -4,13 +4,13 @@ MAINTAINER Ian Merrick <MerrickI@Cardiff.ac.uk>
 ##############################################################
 # Dockerfile Version:   0.1
 # Software:             samtools
-# Software Version:     1.1
+# Software Version:     1.3.1
 # Software Website:     https://github.com/samtools/samtools/
 # Description:          samtools
 ##############################################################
 
 ENV APP_NAME=samtools
-ENV VERSION=1.1
+ENV VERSION=1.3.1
 ENV GIT=https://github.com/BenLangmead/samtools.git
 ENV APPS=/software/applications
 ENV DEST=$APPS/$APP_NAME/
