@@ -1,6 +1,6 @@
-# GBrowse-2.555
+# GBrowse
 
-GBrowse-2.555 license: GPL
+GBrowse license: GPL
 
 ## Useful Links
 
@@ -10,4 +10,10 @@ GBrowse-2.555 license: GPL
 
 ## Example Usage
 See the [container github-site](https://github.com/sglim2/docker-bio) for further usage documentation.
+
+Start the container in deamon mode
+```
+docker run -it -v /sys/fs/cgroup:/sys/fs/cgroup:ro -p 127.0.0.1:8080:80 sglim2/gbrowse bash
+httpd
+```
 
