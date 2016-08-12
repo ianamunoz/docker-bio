@@ -1,4 +1,4 @@
-FROM sglim2/centos7-systemd
+FROM sglim2/centos7
 MAINTAINER Ian Merrick <MerrickI@Cardiff.ac.uk>
 
 ##############################################################
@@ -12,7 +12,6 @@ MAINTAINER Ian Merrick <MerrickI@Cardiff.ac.uk>
 RUN yum install -y httpd ; \
     yum clean all; \
     systemctl enable httpd.service
-EXPOSE 80
 
 RUN yum install -y \
            bzip2 \
@@ -117,5 +116,8 @@ RUN cpanm Env \
 #    cd ../         ; \
 #    mkdir -p $DEST ; \
 #    mv $APP_NAME $DEST/$VERSION
-CMD ["/bin/bash"]
+
+RUN echo "/usr/sbin/apachectl" >> /root/.bashrc
+
+EXPOSE 80
 
