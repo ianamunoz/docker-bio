@@ -40,5 +40,4 @@ test_app:
 deploy_app:
   type: deploy
   script: 
-   - git push --mirror git@github.com:sglim2/docker-bio.git
-   
+   - git push -f git@github.com:sglim2/docker-bio  master
