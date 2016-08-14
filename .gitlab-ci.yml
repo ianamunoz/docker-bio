@@ -1,0 +1,44 @@
+# Should only be run on a trusted (and dedicated) server!
+
+before_script:
+  # Run ssh-agent (inside the build environment)
+  - eval $(ssh-agent -s)
+  # annoyingly, there are a bunch of windows return characters in this env var (a gitlab bug)
+  # extra annoyingly, a tmp file is needed - can't get a pipe to perl to work inside the ssh-add line
+  - echo "$gitlab_to_github_deploy_key" | perl -pi -e 's/\r\n/\n/g' > ./deploykey
+  # following line set up in the way it is to avoid an extra chmod step
+  - ssh-add <(cat ./deploykey )
+  # quick, get rid of it!
+  - rm -f ./deploykey
+
+types:
+  - clean
+  - build
+  - test
+  - deploy
+
+clean_app:
+  type: clean
+  script: 
+   - docker rm $(docker ps -a -q)
+   - docker rmi $(docker images -q)
+  
+build_app:
+  type: build
+  script:
+   - make -C bowtie2/2.2.9/
+   - make -C bowtie/1.1.1/
+   - make -C bowtie/1.1.2/
+
+test_app:
+  type: test
+  script:
+   - docker run -i sglim2/bowtie2-2.2.9 bowtie2 --version
+   - docker run -i sglim2/bowtie-1.1.1 bowtie --version
+   - docker run -i sglim2/bowtie-1.1.2 bowtie --version
+
+deploy_app:
+  type: deploy
+  script: 
+   - git push git@github.com:sglim2/docker-bio.git master:master
+   
