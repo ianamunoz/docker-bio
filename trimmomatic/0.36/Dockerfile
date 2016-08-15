@@ -19,7 +19,8 @@ ENV ADAPTERPATH=$DEST/$VERSION/adapters
 RUN yum install -y unzip java ; \
     curl -L -o $APP_NAME-$VERSION.zip \
        http://www.usadellab.org/cms/uploads/supplementary/Trimmomatic/Trimmomatic-$VERSION.zip ; \
-    unzip $APP_NAME-$VERSION.zip ; \ 
+    unzip $APP_NAME-$VERSION.zip ; \
+    rm -f $APP_NAME-$VERSION.zip ; \ 
     mkdir -p /usr/share/licenses/$APP_NAME-$VERSION ; \
     cp $APP_NAME-$VERSION/LICENSE /usr/share/licenses/$APP_NAME-$VERSION/ ; \
     mkdir -p $DEST ; \
