@@ -1,4 +1,8 @@
-# Should only be run on a trusted (and dedicated) server!
+# * Should only be run on a trusted (and dedicated) server!
+# * This script relies on 
+#  - a private key in the gitlab_to_github_deploy_key env var
+#  - a public key on github
+#  - a public key (deploy) on gitlab
 
 before_script:
   # Run ssh-agent (inside the build environment)
@@ -40,4 +44,6 @@ test_app:
 deploy_app:
   type: deploy
   script: 
-   - git push -f git@github.com:sglim2/docker-bio  master
+   - git clone git@bigr:sacim/docker-bio && cd docker-bio && git push -f git@github.com:sglim2/docker-bio  master && cd .. && rm -rf docker-bio
+
+
