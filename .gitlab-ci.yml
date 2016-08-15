@@ -34,6 +34,7 @@ build_app:
    - make -C bowtie/1.1.2/
    - make -C bowtie2/2.2.9/
    - make -C bwa/0.7.15/
+   - make -C eqtlbma/v1.3.1
 
 test_app:
   type: test
@@ -42,6 +43,7 @@ test_app:
    - make -C bowtie/1.1.2/ test
    - make -C bowtie2/2.2.9/ test
    - make -C bwa/0.7.15/ test
+   - make -C eqtlbma/v1.3.1 test
 
 deploy_app:
   type: deploy
