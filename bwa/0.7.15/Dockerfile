@@ -11,10 +11,10 @@ MAINTAINER Ian Merrick <MerrickI@Cardiff.ac.uk>
 ENV APP_NAME=bwa
 ENV VERSION=v0.7.15
 ENV GIT=https://github.com/lh3/bwa.git
-ENV DEST=/software/$APP_NAME/
-ENV PATH $DEST/$VERSION/:$PATH
+ENV DEST=/software/applications/$APP_NAME/
+ENV PATH=$DEST/$VERSION/:$DEST/$VERSION/bwakit:$PATH
 
-RUN yum install -y zlib-devel ; \
+RUN yum install -y zlib-devel wget ; \
     git clone $GIT ; \
     cd $APP_NAME ; \
     git checkout tags/$VERSION ; \

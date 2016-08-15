@@ -30,20 +30,23 @@ clean_app:
 build_app:
   type: build
   script:
-   - make -C bowtie2/2.2.9/
    - make -C bowtie/1.1.1/
    - make -C bowtie/1.1.2/
+   - make -C bowtie2/2.2.9/
+   - make -C bwa/0.7.15/
 
 test_app:
   type: test
   script:
-   - docker run -i sglim2/bowtie2-2.2.9 bowtie2 --version
-   - docker run -i sglim2/bowtie-1.1.1 bowtie --version
-   - docker run -i sglim2/bowtie-1.1.2 bowtie --version
+   - make -C bowtie/1.1.1/ test
+   - make -C bowtie/1.1.2/ test
+   - make -C bowtie2/2.2.9/ test
+   - make -C bwa/0.7.15/ test
 
 deploy_app:
   type: deploy
   script: 
-   - git clone git@bigr:sacim/docker-bio && cd docker-bio && git push -f git@github.com:sglim2/docker-bio  master && cd .. && rm -rf docker-bio
+   - echo "Force push to github disabled"
+#   - git clone git@bigr:sacim/docker-bio && cd docker-bio && git push -f git@github.com:sglim2/docker-bio  master && cd .. && rm -rf docker-bio
 
 
