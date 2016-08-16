@@ -24,8 +24,8 @@ types:
 clean_app:
   type: clean
   script: 
-   - docker rm $(docker ps -a -q)
-   - docker rmi $(docker images -q)
+   - docker rm $(docker ps -a -q) || true
+   - docker rmi $(docker images -q) || true
   
 build_app:
   type: build
