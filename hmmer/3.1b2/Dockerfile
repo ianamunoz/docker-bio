@@ -14,15 +14,15 @@ ENV DEST=/software/applications/$APP_NAME/
 ENV PATH=$DEST/$VERSION/bin:$PATH
 ENV MANPATH=$DEST/$VERSION/share/man:$MANPATH
 
-RUN curl -L -o hmmer-$VERSION.tar.gz http://eddylab.org/software/hmmer3/3.1b2/hmmer-3.1b2.tar.gz ; \
-    tar xzf hmmer-$VESION.tar.gz ; \
-    cd hmmer-$VERSION ; \
+RUN curl -L -o $APP_NAME-$VERSION.tar.gz http://eddylab.org/software/hmmer3/$VERSION/$APP_NAME-$VERSION.tar.gz ; \
+    tar xzf $APP_NAME-$VERSION.tar.gz ; \
+    cd $APP_NAME-$VERSION ; \
     ./configure --prefix=$DEST/$VERSION ; \
     make -j ; \
     make install ; \
     mkdir -p /usr/share/licenses/$APP_NAME-$VERSION ; \
     cp LICENSE /usr/share/licenses/$APP_NAME-$VERSION/ ; \
     cd ../ ;  \
-    rm -rf hmmer-$VESION.tar.gz hmmer-$VESION ; 
+    rm -rf $APP_NAME-$VESION.tar.gz $APP_NAME-$VERSION ; 
 CMD ["/bin/bash"]
 
