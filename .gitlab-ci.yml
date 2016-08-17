@@ -1,8 +1,8 @@
 # * Should only be run on a trusted (and dedicated) server
 # * This script relies on 
-#  - a private key in the gitlab_to_github_deploy_key env var
-#  - a public key on github
-#  - a public key (deploy) on gitlab
+#  - a private key in the gitlab_to_github_deploy_key environment variable
+#  - associated public key on github
+#  - associated public key (deploy) on gitlab
 
 before_script:
   # Run ssh-agent (inside the build environment)
@@ -20,38 +20,25 @@ before_script:
   -  docker login -e unknown -u gitlab-ci-token -p $CI_BUILD_TOKEN bigr.bios.cf.ac.uk:4567
 
 types:
-#  - clean
   - build
   - test
+  - clean
   - deploy
 
-#clean_app:
-#  type: clean
-#  script: 
-#   - docker rm $(docker ps -a -q) || true
-#   - docker rmi $(docker images -q) || true
+clean_app:
+  type: clean
+  script: 
+   - make clean
   
 build_app:
   type: build
   script:
    - make build
-#   - make -C bowtie/1.1.1/
-#   - make -C bowtie/1.1.2/
-#   - make -C bowtie2/2.2.9/
-#   - make -C bwa/0.7.15/
-#   - make -C eqtlbma/v1.3.1
-#   - make -C hmmer/3.1b2
 
 test_app:
   type: test
   script:
    - make test
-#   - make -C bowtie/1.1.1/ test
-#   - make -C bowtie/1.1.2/ test
-#   - make -C bowtie2/2.2.9/ test
-#   - make -C bwa/0.7.15/ test
-#   - make -C eqtlbma/v1.3.1 test
-#   - make -C hmmer/3.1b2 test
 
 deploy_app:
   type: deploy

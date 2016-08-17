@@ -2,7 +2,7 @@ REGISTRY = bigr.bios.cf.ac.uk:4567
 NAME = genomics/centos7
 IMAGE = $(REGISTRY)/$(NAME)
 
-.PHONY: build push run test clean
+.PHONY: all build push run test clean
 
 all: build
 
