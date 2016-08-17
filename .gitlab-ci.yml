@@ -1,4 +1,4 @@
-# * Should only be run on a trusted (and dedicated) server!
+# * Should only be run on a trusted (and dedicated) server
 # * This script relies on 
 #  - a private key in the gitlab_to_github_deploy_key env var
 #  - a public key on github
@@ -14,38 +14,44 @@ before_script:
   - ssh-add <(cat ./deploykey )
   # quick, get rid of it!
   - rm -f ./deploykey
+  # test docker is running
+  - docker info
+  # log into the docker registry
+  - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN bigr.bios.cf.ac.uk
 
 types:
-  - clean
+#  - clean
   - build
   - test
   - deploy
 
-clean_app:
-  type: clean
-  script: 
-   - docker rm $(docker ps -a -q) || true
-   - docker rmi $(docker images -q) || true
+#clean_app:
+#  type: clean
+#  script: 
+#   - docker rm $(docker ps -a -q) || true
+#   - docker rmi $(docker images -q) || true
   
 build_app:
   type: build
   script:
-   - make -C bowtie/1.1.1/
-   - make -C bowtie/1.1.2/
-   - make -C bowtie2/2.2.9/
-   - make -C bwa/0.7.15/
-   - make -C eqtlbma/v1.3.1
-   - make -C hmmer/3.1b2
+   - make build
+#   - make -C bowtie/1.1.1/
+#   - make -C bowtie/1.1.2/
+#   - make -C bowtie2/2.2.9/
+#   - make -C bwa/0.7.15/
+#   - make -C eqtlbma/v1.3.1
+#   - make -C hmmer/3.1b2
 
 test_app:
   type: test
   script:
-   - make -C bowtie/1.1.1/ test
-   - make -C bowtie/1.1.2/ test
-   - make -C bowtie2/2.2.9/ test
-   - make -C bwa/0.7.15/ test
-   - make -C eqtlbma/v1.3.1 test
-   - make -C hmmer/3.1b2 test
+   - make test
+#   - make -C bowtie/1.1.1/ test
+#   - make -C bowtie/1.1.2/ test
+#   - make -C bowtie2/2.2.9/ test
+#   - make -C bwa/0.7.15/ test
+#   - make -C eqtlbma/v1.3.1 test
+#   - make -C hmmer/3.1b2 test
 
 deploy_app:
   type: deploy
