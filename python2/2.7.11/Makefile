@@ -1,12 +1,27 @@
+REGISTRY = bigr.bios.cf.ac.uk:4567
+NAME = genomics/python2-2.7.11
+IMAGE = $(REGISTRY)/$(NAME)
+
+.PHONY: all build push run test clean
+
 all: build
 
 build:
-	docker build --rm -t sglim2/python2-2.7.11 .
+	docker build --no-cache --rm -t $(IMAGE) .
 
 # docker login required for push
 push:
-	docker push sglim2/python2-2.7.11
+	docker push $(IMAGE)
 
 run:
-	docker run -i -t -d sglim2/python2-2.7.11 /bin/bash
-	docker ps
+	docker run -it $(IMAGE) bash
+
+test:
+	docker run -i $(IMAGE) bash < tests.sh
+
+clean:
+ifeq ($(strip $(IMAGE)),) 
+	echo "Nothing to delete" 
+else 
+	docker ps -a | awk '{ print $$1,$$2 }' | grep "$(IMAGE)" | awk '{print $$1 }' | xargs -I {} docker rm {} 
+endif

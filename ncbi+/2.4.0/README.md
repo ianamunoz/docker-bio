@@ -1,3 +1,2 @@
-bowtie2 Usage
-=============
+# ncbi-blast+
 

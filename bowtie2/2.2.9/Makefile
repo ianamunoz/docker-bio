@@ -1,14 +1,27 @@
+REGISTRY = bigr.bios.cf.ac.uk:4567
+NAME = genomics/bowtie2-2.2.9
+IMAGE = $(REGISTRY)/$(NAME)
+
+.PHONY: all build push run test clean
+
 all: build
 
 build:
-	docker build --rm -t sglim2/bowtie2-2.2.9 .
+	docker build --no-cache --rm -t $(IMAGE) .
 
 # docker login required for push
 push:
-	docker push sglim2/bowtie2-2.2.9
+	docker push $(IMAGE)
 
 run:
-	docker run -it sglim2/bowtie2-2.2.9 bash
+	docker run -it $(IMAGE) bash
 
 test:
-	docker run -i sglim2/bowtie2-2.2.9 bash  < tests.sh
+	docker run -i $(IMAGE) bash < tests.sh
+
+clean:
+ifeq ($(strip $(IMAGE)),) 
+	echo "Nothing to delete" 
+else 
+	docker ps -a | awk '{ print $$1,$$2 }' | grep "$(IMAGE)" | awk '{print $$1 }' | xargs -I {} docker rm {} 
+endif

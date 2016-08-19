@@ -94,7 +94,8 @@ RUN yum install -y \
        http://www.usadellab.org/cms/uploads/supplementary/Trimmomatic/Trimmomatic-0.36.zip ; \
     unzip Trimmomatic-0.36.zip ; \
     mkdir -p $DEST ; \
-    mv Trimmomatic-0.36  $DEST/$VERSION
+    mv Trimmomatic-0.36  $DEST/$VERSION ; \
+    rm -rf Trimmomatic-0.36.zip
 COPY $APP_NAME-$VERSION.module $MOD_DEST/$VERSION
 
 # TRINITYRNASEQ 2.2.0

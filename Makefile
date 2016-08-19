@@ -1,17 +1,24 @@
 
-.PHONY: all build test clean
 
-all: build
+subdirs = centos/7 \
+          bowtie/1.1.1 \
+          bowtie/1.1.2 \
+          bwa/0.7.15 \
+          eqtlbma/v1.3.1 \
+          groups/kille/complete \
+          hmmer/3.1b2 \
+          ncbi+/2.4.0 \
+          samtools/1.1 \
+          samtools/1.3.1
 
-build:
-	$(MAKE) -C centos/7 build
-	$(MAKE) -C bowtie/1.1.1 build
+.PHONY: $(subdirs)
 
-test:
-	$(MAKE) -C centos/7 test
-	$(MAKE) -C bowtie/1.1.1 test
+all: $(subdirs)
+build: $(subdirs)
+test: $(subdirs)
+clean: $(subdirs)
 
-clean:
-	$(MAKE) -C centos/7 clean
-	$(MAKE) -C bowtie/1.1.1 clean
+$(subdirs):
+	$(MAKE) -C $@  $(MAKECMDGOALS)
+	
 
