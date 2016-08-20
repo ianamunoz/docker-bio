@@ -10,12 +10,18 @@ MAINTAINER Ian Merrick <MerrickI@Cardiff.ac.uk>
 
 ENV APP_NAME=python2
 ENV VERSION=2.7.11
-ENV DEST=/software/$APP_NAME/
+ENV DEST=/software/applications/$APP_NAME/
 ENV PATH=$DEST/$VERSION/bin:$PATH
 ENV PYTHONPATH=$DEST/$VERSION/lib/python2.7
 ENV MANPATH=$DEST/$VERSION/share/man:$MANPATH
 
-RUN yum install -y openssl-devel zlib-devel ; \
+RUN yum install -y \
+       bzip2-devel \
+       openssl-devel \
+       readline-devel \
+       sqlite-devel  \
+       tk-devel  \
+       zlib-devel ; \
     curl -L -o Python-$VERSION.tgz https://www.python.org/ftp/python/$VERSION/Python-$VERSION.tgz ; \
     tar xvf Python-$VERSION.tgz ; \
     cd Python-$VERSION ; \
