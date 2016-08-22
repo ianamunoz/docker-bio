@@ -43,7 +43,7 @@ test_app:
 deploy_app:
   type: deploy
   script: 
-   - git clone git@bigr:sacim/docker-bio && cd docker-bio && git push -f git@github.com:sglim2/docker-bio  master && cd .. && rm -rf docker-bio
+   - git clone git@bigr:genomics/docker-bio && cd docker-bio && git push -f git@github.com:sglim2/docker-bio  master && cd .. && rm -rf docker-bio
 #   - echo "Force push to github disabled"
 
 
